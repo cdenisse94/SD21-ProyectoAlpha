@@ -30,10 +30,10 @@ public class MulticastConnection {
     public void enviaFin(String ganador, ControlesJuego juego) throws IOException, InterruptedException {
         String mensaje = "";
         if (ganador.equals("EMPATE")) {
-            mensaje = "*EMPATE*";
+            mensaje = "~EMPATE~";
         } else {
             System.out.println("GANADOR: " + ganador);
-            mensaje = "*" + ganador + "*";
+            mensaje ="~" + ganador + "~";
         }
         byte[] m = mensaje.getBytes();
         DatagramPacket mensajeSalida = new DatagramPacket(m, m.length, grupo, puertoMulticast);

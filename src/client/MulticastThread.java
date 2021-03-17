@@ -31,10 +31,12 @@ public class MulticastThread extends Thread {
 	    	byte[] buffer = new byte[20];
                 System.out.println("Esperando por mensajes MULTICAST");
                 DatagramPacket messageIn = new DatagramPacket(buffer, buffer.length);
+                
                 listenSocket.receive(messageIn);
                 String data = new String(messageIn.getData());
                 System.out.println("Mensaje: " + data);
-                if(data.charAt(0)=='*'){
+                
+                if(data.charAt(0)=='~'){
                     interfaz.victoria(data);
                     TimeUnit.SECONDS.sleep(2);
                 }
