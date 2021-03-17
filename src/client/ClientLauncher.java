@@ -2,7 +2,7 @@ package client;
 
 public class ClientLauncher {
     
-    private static final int nClientes = 2;
+    private static final int nClientes = 5;
     private static final int nRequest = 2;
     private static ClientThread CTarreglo [] = new ClientThread[nClientes];
     

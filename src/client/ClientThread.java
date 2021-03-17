@@ -56,6 +56,8 @@ public class ClientThread extends Thread{
                 multiThread = new MulticastThread(datosJuego.getPuertoMulticast(), datosJuego.getIpMulticast(), this);
                 multiThread.start();
             }
+            
+            socketTCP.close();
         } catch (RemoteException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {

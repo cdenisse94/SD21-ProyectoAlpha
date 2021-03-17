@@ -42,33 +42,23 @@ public class ServerLauncher {
             control.setMulticast(multicast);
             TimeUnit.SECONDS.sleep(10);
             
-            int initGame = JOptionPane.showConfirmDialog(null, "Esperando jugadores \n ¿Iniciar juego?", "Whack-a-mole", JOptionPane.DEFAULT_OPTION);
-
-            if (initGame == JOptionPane.YES_OPTION){
+            //int initGame = JOptionPane.showConfirmDialog(null, "Esperando jugadores \n ¿Iniciar juego?", "Whack-a-mole", JOptionPane.DEFAULT_OPTION);
+            System.out.println("Aprieta la letra (i) para iniciar: ");
+            Scanner sc = new Scanner(System.in);
+            String res = sc.nextLine();
+            System.out.println("LETRA: " + res);
+            
+            if (res.equals("i")){
+                System.out.println("A jugarrrr");
                 boolean bandera = true;
                 boolean banderaFin = false;
-                while(true){
+                
+                while(!banderaFin){
                     banderaFin = control.getFin(); 
                     TimeUnit.SECONDS.sleep(100);
                     control.start();
-                    
-                    /*
-                    if(banderaFin){
-                        ArrayList<Jugador> aux = control.getArregloJugadores();
-                        control = new ControlesJuego();
-                        control.setMulticast(multicast);
-                        control.setArregloJugadores(aux);
-                        tcpThread.setControlesJuego(control);
-                        bandera = true;
-                        TimeUnit.SECONDS.sleep(10);
-                        System.out.println("REINICIANDO EL JUEGO...");
-                    }      
-                    else {
-                        TimeUnit.MILLISECONDS.sleep(500);
-                        control.start();
-                    }
-                    */
                 }
+                System.out.println("--------");
             }
         } catch (Exception e) {
             System.err.println("Motor con una excepción encontrada:");

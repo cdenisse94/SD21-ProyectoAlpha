@@ -48,7 +48,9 @@ public class MulticastThread extends Thread {
                         
                         Random r = new Random();
                         int num = r.nextInt(9) + 1;
+                        System.out.println("-----------------" + num);
                         int num2 = r.nextInt(10) +1;
+                        System.out.println("--------" + num2);
                         Socket s = clientThread.getSocket();
                         DataInputStream in = new DataInputStream(s.getInputStream());
                         DataOutputStream out = new DataOutputStream(s.getOutputStream());
@@ -56,6 +58,7 @@ public class MulticastThread extends Thread {
                         TimeUnit.MILLISECONDS.sleep(num2);
                     }
                 }
+                
             }
         } catch (IOException ex) {
             Logger.getLogger(TCPThread.class.getName()).log(Level.SEVERE, null, ex);
