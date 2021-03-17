@@ -1,2 +1,2 @@
 /dist/
-*.class
+git rm -r --cached *.class
