@@ -1,5 +1,6 @@
 package interfaces;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -18,12 +19,15 @@ public class ControlesJuego {
     private int monstActual;
     private boolean fin;
     private double tiempoInicio;
+    private double startTime;
     
     public ControlesJuego(){
+        startTime = System.currentTimeMillis();
         arregloJugadores = new ArrayList<Jugador>();
         puntajeJugador=0;
         inicio = true;
         fin = false;     
+        
     }
 
     public boolean getFin(){
@@ -68,11 +72,16 @@ public class ControlesJuego {
     }
     
     public boolean start() throws InterruptedException, IOException{
+        FileWriter archivo = new FileWriter("prueba.txt",true);
         if (inicio){
             if(puntajeJugador<PUNTOS){
                 enviaMonstruo();
                 inicio=false;
-                tiempoInicio = System.currentTimeMillis();
+                tiempoInicio = System.currentTimeMillis()-startTime;
+                archivo.write(String.valueOf(tiempoInicio)+" "+"\n");
+                archivo.write("\n");
+                archivo.close();
+                startTime = System.currentTimeMillis();
                 return true;
             }
             else {

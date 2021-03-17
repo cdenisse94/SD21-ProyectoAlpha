@@ -15,8 +15,10 @@ public class ServerLauncher {
     
     public static void main(String[] args) {
 //        String rutaServerPolicy = "file:C:/Users/lucio/Documents/NetBeansProjects/ProyectoAlpha/src/server/server.policy";
-        String rutaServerPolicy = "file:D:/Documents/NetBeans/SD21-ProyectoAlpha/src/server/server.policy";
+        String rutaServerPolicy = "file:C:/Users/agnar/Documents/dis/SD21-ProyectoAlpha/src/server/server.policy";
         System.setProperty("java.security.policy",rutaServerPolicy);
+        
+        
         if (System.getSecurityManager() == null) {
            System.setSecurityManager(new SecurityManager());
         }
@@ -46,7 +48,11 @@ public class ServerLauncher {
                 boolean bandera = true;
                 boolean banderaFin = false;
                 while(true){
-                    banderaFin = control.getFin();          
+                    banderaFin = control.getFin(); 
+                    TimeUnit.SECONDS.sleep(100);
+                    control.start();
+                    
+                    /*
                     if(banderaFin){
                         ArrayList<Jugador> aux = control.getArregloJugadores();
                         control = new ControlesJuego();
@@ -61,6 +67,7 @@ public class ServerLauncher {
                         TimeUnit.MILLISECONDS.sleep(500);
                         control.start();
                     }
+                    */
                 }
             }
         } catch (Exception e) {
