@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 import interfaces.InfoJuego;
+import javax.swing.JOptionPane;
 
 public class ServerLauncher {
     
@@ -21,23 +22,27 @@ public class ServerLauncher {
         }
         try {
             LocateRegistry.createRegistry(1099);   
+            
             String nombre = "Información del juego";
             InfoJuegoServer motor = new InfoJuegoServer();
             InfoJuego motor2 = (InfoJuego) UnicastRemoteObject.exportObject(motor, 0);
+            
             Registry registro = LocateRegistry.getRegistry();
             registro.rebind(nombre, motor2);
+            
             System.out.println("Motor enlazado");
+            
             ControlesJuego control = new ControlesJuego();
             TCPThread tcpThread = new TCPThread(control);
             tcpThread.start();
+            
             MulticastConnection multicast = new MulticastConnection();
             control.setMulticast(multicast);
             TimeUnit.SECONDS.sleep(10);
-            System.out.println("Inicio? (y)");
-            Scanner sc = new Scanner(System.in);
-            String s = sc.nextLine();
+            
+            int initGame = JOptionPane.showConfirmDialog(null, "Esperando jugadores \n ¿Iniciar juego?", "Whack-a-mole", JOptionPane.DEFAULT_OPTION);
 
-            if (s.equals("y")){
+            if (initGame == JOptionPane.YES_OPTION){
                 boolean bandera = true;
                 boolean banderaFin = false;
                 while(true){
