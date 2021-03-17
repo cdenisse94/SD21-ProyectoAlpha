@@ -13,8 +13,8 @@ import interfaces.InfoJuego;
 public class ServerLauncher {
     
     public static void main(String[] args) {
-//        String rutaServerPolicy = "file:C:/Users/lucio/Documents/NetBeansProjects/ProyectoAlpha/src/server/server.policy";
-        String rutaServerPolicy = "file:D:/Documents/NetBeans/SD21-ProyectoAlpha/src/server/server.policy";
+        String rutaServerPolicy = "file:C:/Users/lucio/Documents/GitHub/SD21-ProyectoAlpha/src/server/server.policy";
+        //String rutaServerPolicy = "file:D:/Documents/NetBeans/SD21-ProyectoAlpha/src/server/server.policy";
         System.setProperty("java.security.policy",rutaServerPolicy);
         if (System.getSecurityManager() == null) {
            System.setSecurityManager(new SecurityManager());

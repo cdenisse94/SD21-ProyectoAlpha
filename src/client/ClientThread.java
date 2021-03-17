@@ -19,11 +19,19 @@ public class ClientThread extends Thread{
     private String rutaClientPolicy;
     private String ipRMI;
     private Socket socketTCP;
+    private int numRequets;
     
     public ClientThread (String pathPolicy, String ipRMI){
         this.rutaClientPolicy = pathPolicy;
         this.ipRMI = ipRMI;
         Socket socketTCP = null;
+    }
+
+    public ClientThread(String rutaClientPolicy, String ipRMI, int numRequets) {
+        this.rutaClientPolicy = rutaClientPolicy;
+        this.ipRMI = ipRMI;
+        Socket socketTCP = null;
+        this.numRequets = numRequets;
     }
     
     public void run(){
