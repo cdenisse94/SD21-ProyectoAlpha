@@ -19,10 +19,12 @@ public class ClientThread extends Thread{
     private String rutaClientPolicy;
     private String ipRMI;
     private Socket socketTCP;
+    private int nrequests;
     
-    public ClientThread (String pathPolicy, String ipRMI){
+    public ClientThread (String pathPolicy, String ipRMI, int nRequest){
         this.rutaClientPolicy = pathPolicy;
         this.ipRMI = ipRMI;
+        this.nrequests=nRequest;
         Socket socketTCP = null;
     }
     
@@ -37,19 +39,25 @@ public class ClientThread extends Thread{
             InfoJuego juego = (InfoJuego) registro.lookup(nombre);
             DatosJuego datosJuego = juego.getInfo();
             int serverTCPPort = datosJuego.getPuertoTCP();
+            
             InetAddress serverTCPIp = datosJuego.getIpTCP();
             socketTCP = new Socket(serverTCPIp, serverTCPPort);
             DataInputStream in = new DataInputStream(socketTCP.getInputStream());
             DataOutputStream out = new DataOutputStream(socketTCP.getOutputStream());
             out.writeUTF("registro");
+            
+            
             MulticastThread multiThread;
             String data = in.readUTF();
+            
+            
             if (data.equals("registrado")){
                 System.out.println("Recibido: " + data) ;
-                InterfazGrafica interfaz = new InterfazGrafica(socketTCP); 
-                multiThread = new MulticastThread(datosJuego.getPuertoMulticast(), datosJuego.getIpMulticast(), interfaz, this);
+                multiThread = new MulticastThread(datosJuego.getPuertoMulticast(), datosJuego.getIpMulticast(), this);
                 multiThread.start();
             }
+            
+            socketTCP.close();
         } catch (RemoteException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NotBoundException ex) {
@@ -57,6 +65,10 @@ public class ClientThread extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(ClientThread.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public Socket getSocket(){
+        return socketTCP;
     }
     
 }
