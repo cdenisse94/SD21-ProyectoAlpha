@@ -72,7 +72,7 @@ public class InterfazGrafica extends JFrame implements ItemListener {
     
     public void victoria(String message){
         this.desactivaTodo();
-        JOptionPane.showMessageDialog(null, message);
+        JOptionPane.showMessageDialog(null, "El ganador es: " + message);
     }
     
 }
